@@ -4,6 +4,7 @@ const cookieParser=require("cookie-parser")
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const dotenv=require("dotenv");
+const { sendMail } = require("../config/nodemailer");
 dotenv.config();
 
 const acc_secretKey=process.env.ACCESSSTOKEN_SECRETEKEY
@@ -13,6 +14,18 @@ const ref_secretKey=process.env.REFRESHTOKEN_SECRETEKEY
 //signup
 const signup=async(req,res)=>{
    
+
+    //email
+    // yourApp.js
+const sendEmail = require('./emailService');
+
+// Example: Sending a welcome email
+
+const welcomeSubject = "Welcome and Shubham Lalwadiya's web-site  just follow me in linkdin";
+const welcomeText = 'Thank you for registering . We look forward to having you as a member!';
+//
+
+
     
     const passwordRegex = /^(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}/;
     let {email,username,pass}=req.body
@@ -33,6 +46,17 @@ const signup=async(req,res)=>{
                 const user=new UserModel({email,username,pass:hash});
                 await user.save()//replace with create
                 console.log(req.body)
+
+                sendMail(email, welcomeSubject, welcomeText)
+  .then(() => {
+    console.log('Email sent successfully!');
+  })
+  .catch((error) => {
+    console.error('Error sending email:', error);
+  });
+
+
+
                 return res.status(201).send({msg:"New user has been successfully created account"})
             }
         })  
