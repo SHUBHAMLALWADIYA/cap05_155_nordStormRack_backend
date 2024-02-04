@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cookieParser())
 
 
-
+//cap05155nordstormrackbackend-production.up.railway.app
 //routers
 app.use("/user",userRouter)
 app.use("/cart",auth,cartRouter)
