@@ -15,6 +15,7 @@ dotenv.config();
 const PORT=process.env.PORT;
 
 //middlewares
+app.use(cookieParser())
 app.use(cors({
     origin:[
         "https://cap05155nordstormrackbackend-production.up.railway.app",
@@ -24,7 +25,7 @@ app.use(cors({
 }
 ));
 app.use(express.json());
-app.use(cookieParser())
+
 
 
 //cap05155nordstormrackbackend-production.up.railway.app

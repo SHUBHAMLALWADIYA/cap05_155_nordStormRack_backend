@@ -54,7 +54,7 @@ const login=async(req,res)=>{
         const cookieOption={
             httpOnly:true,
             secure:true,
-            sameSite:"none"
+            sameSite:"None"
         }
        
         const findUser= await UserModel.findOne({email})

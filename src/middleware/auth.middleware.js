@@ -23,11 +23,11 @@ const auth=async(req,res,next)=>{
     const refreshtoken=req.cookies.refreshtoken;
     console.log(req.cookies)
     try {
-        // const logoutData= await LogoutModel.exists({accesstoken})
-        // console.log("logout",logoutData,"1")
-        // if(logoutData){
-        //     res.status(200).send({msg:"please login"})
-        // }
+        const logoutData= await LogoutModel.exists({accesstoken})
+        console.log("logout",logoutData,"1")
+        if(logoutData){
+            res.status(200).send({msg:"please login"})
+        }
 
         jwt.verify(accesstoken,process.env.ACCESSSTOKEN_SECRETEKEY,async(err,decoded)=>{
             if(decoded){
@@ -40,7 +40,8 @@ const auth=async(req,res,next)=>{
                         const cookieOption={
                             httpOnly:true,
                             secure:true,
-                            sameSite:"none"
+                            sameSite:"None"
+                        
                         }
                         if (decoded) {
                             const accesstoken = jwt.sign({userId:decoded.userId,username:decoded.username}, process.env.ACCESSSTOKEN_SECRETEKEY, {expiresIn: "15m"});
@@ -57,7 +58,19 @@ const auth=async(req,res,next)=>{
                 }
             }
         })
+
+
+
+
+        // const decoded=jwt.verify(accesstoken,process.env.ACCESSSTOKEN_SECRETEKEY)
+        // console.log(decoded)
+        // if(decoded){
+        //     req.me=decoded;
+        //     console.log("decoded",decoded)
+        //         next()
+        // }
     } catch (error) {
+        console.log(error)
         return res.send({ error: error.message, message: "please login again" });
     }
 }
