@@ -5,6 +5,6 @@ const cartRouter=express.Router();
 
 cartRouter.post("/addToCart",addToCart)
 cartRouter.get("/cartData",cartData)
-cartRouter.patch("/deleteProduct",deleteProduct)
+cartRouter.post("/deleteProduct",deleteProduct)
 
 module.exports=cartRouter;
