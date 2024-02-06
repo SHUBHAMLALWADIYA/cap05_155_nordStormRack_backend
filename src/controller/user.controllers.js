@@ -51,6 +51,11 @@ const login=async(req,res)=>{
    
    
     try {
+        const cookieOption={
+            httpOnly:true,
+            secure:true,
+            sameSite:"none"
+        }
        
         const findUser= await UserModel.findOne({email})
         const payload={userId:findUser._id,username:findUser.username}
@@ -59,8 +64,8 @@ const login=async(req,res)=>{
             if(result){
                 const accesstoken=jwt.sign(payload,acc_secretKey,{expiresIn:"15m"})
                 const refreshtoken=jwt.sign(payload,ref_secretKey,{expiresIn:"30m"})
-                res.cookie("accesstoken",accesstoken)
-                res.cookie("refreshtoken",refreshtoken)
+                res.cookie("accesstoken",accesstoken,cookieOption)
+                res.cookie("refreshtoken",refreshtoken,cookieOption)
                 return res.status(200).send({msg:"Login successfull !",accesstoken:accesstoken,refreshtoken:refreshtoken})
             }else{
                 return res.status(200).send({msg:"your password is wrong please correct it"})
@@ -80,7 +85,7 @@ const logout = async (req, res) => {
     try {
         const accesstoken = req.cookies.accesstoken;
         const refreshtoken = req.cookies.refreshtoken;
-console.log(req.cookies)
+        console.log(req.cookies)
         console.log({ "accessToken": accesstoken, "refreshToken": refreshtoken });
 
         const loggedOutTokens = await LogoutModel.findOne({ accesstoken, refreshtoken });

@@ -24,11 +24,7 @@ app.use(cors({
 }
 ));
 app.use(express.json());
-app.use(cookieParser({
-    httpOnly:true,
-    secure:true,
-    sameSite:"none"
-}))
+app.use(cookieParser())
 
 
 //cap05155nordstormrackbackend-production.up.railway.app

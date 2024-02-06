@@ -13,6 +13,7 @@ dotenv.config();
 const auth=async(req,res,next)=>{
  
    
+   
     console.log(process.env.REFRESHTOKEN_SECRETEKEY)
     console.log(process.env.REFRESHTOKEN_SECRETEKEY)
     console.log(process.env.MONGO_ATLASH_URI)
@@ -36,11 +37,16 @@ const auth=async(req,res,next)=>{
             }else{
                 if(err.message==="jwt expired"){
                     jwt.verify(refreshtoken,process.env.REFRESHTOKEN_SECRETEKEY,(err,decoded)=>{
-
+                        const cookieOption={
+                            httpOnly:true,
+                            secure:true,
+                            sameSite:"none"
+                        }
                         if (decoded) {
                             const accesstoken = jwt.sign({userId:decoded.userId,username:decoded.username}, process.env.ACCESSSTOKEN_SECRETEKEY, {expiresIn: "15m"});
                            
-                            res.cookie("accesstoken", accesstoken);
+                           
+                            res.cookie("accesstoken", accesstoken,cookieOption);
                           
                             next();
                           } else {
