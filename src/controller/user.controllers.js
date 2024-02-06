@@ -48,11 +48,7 @@ const signup=async(req,res)=>{
 //login
 const login=async(req,res)=>{
     const {email,pass}=req.body
-    const cookieOption={
-        httpOnly:true,
-        secure:true,
-        sameSite:'None'
-    }
+   
    
     try {
        
@@ -63,8 +59,8 @@ const login=async(req,res)=>{
             if(result){
                 const accesstoken=jwt.sign(payload,acc_secretKey,{expiresIn:"15m"})
                 const refreshtoken=jwt.sign(payload,ref_secretKey,{expiresIn:"30m"})
-                res.cookie("accesstoken",accesstoken,cookieOption)
-                res.cookie("refreshtoken",refreshtoken,cookieOption)
+                res.cookie("accesstoken",accesstoken)
+                res.cookie("refreshtoken",refreshtoken)
                 return res.status(200).send({msg:"Login successfull !",accesstoken:accesstoken,refreshtoken:refreshtoken})
             }else{
                 return res.status(200).send({msg:"your password is wrong please correct it"})
