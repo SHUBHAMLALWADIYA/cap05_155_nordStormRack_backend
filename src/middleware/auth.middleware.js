@@ -17,6 +17,11 @@ const auth=async(req,res,next)=>{
         secure:true,
         sameSite:'None'
     }
+    console.log(process.env.REFRESHTOKEN_SECRETEKEY)
+    console.log(process.env.REFRESHTOKEN_SECRETEKEY)
+    console.log(process.env.MONGO_ATLASH_URI)
+    console.log(process.env.PORT)
+
     const accesstoken=req.cookies.accesstoken;
     const refreshtoken=req.cookies.refreshtoken;
     console.log(req.cookies)
