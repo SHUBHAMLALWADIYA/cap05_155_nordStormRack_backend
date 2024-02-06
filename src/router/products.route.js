@@ -4,7 +4,7 @@ const products = require("../controller/products.controller");
 
 const ProductRouter=express.Router();
 
-ProductRouter.post("/",products)
+ProductRouter.get("/",products)
 
 
 module.exports=ProductRouter;
