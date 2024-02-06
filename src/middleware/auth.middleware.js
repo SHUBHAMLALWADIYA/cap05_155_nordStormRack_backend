@@ -23,11 +23,11 @@ const auth=async(req,res,next)=>{
     const refreshtoken=req.cookies.refreshtoken;
     console.log(req.cookies)
     try {
-        const logoutData= await LogoutModel.exists({accesstoken})
-        console.log("logout",logoutData,"1")
-        if(logoutData){
-            res.status(200).send({msg:"please login"})
-        }
+        // const logoutData= await LogoutModel.exists({accesstoken})
+        // console.log("logout",logoutData,"1")
+        // if(logoutData){
+        //     res.status(200).send({msg:"please login"})
+        // }
 
         jwt.verify(accesstoken,process.env.ACCESSSTOKEN_SECRETEKEY,async(err,decoded)=>{
             if(decoded){
