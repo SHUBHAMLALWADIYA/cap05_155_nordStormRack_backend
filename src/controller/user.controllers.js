@@ -66,7 +66,7 @@ const login=async(req,res)=>{
                 const refreshtoken=jwt.sign(payload,ref_secretKey,{expiresIn:"30m"})
                 res.cookie("accesstoken",accesstoken,cookieOption)
                 res.cookie("refreshtoken",refreshtoken,cookieOption)
-                return res.status(200).send({msg:"Login successfull !",accesstoken:accesstoken,refreshtoken:refreshtoken})
+                return res.status(200).send({msg:"Login successfull !",userId:findUser._id,username:findUser.username})
             }else{
                 return res.status(200).send({msg:"your password is wrong please correct it"})
             }
