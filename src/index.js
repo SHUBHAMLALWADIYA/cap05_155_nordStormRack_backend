@@ -7,6 +7,7 @@ const userRouter = require("./router/user.route");
 const cartRouter = require("./router/cart.route");
 const auth = require("./middleware/auth.middleware");
 const orderRouter = require("./router/order.rote");
+const ProductRouter = require("./router/products.route");
 
 const app=express();
 
@@ -31,6 +32,7 @@ app.use(cookieParser())
 app.use("/user",userRouter)
 app.use("/cart",auth,cartRouter)
 app.use("/order",auth,orderRouter)
+app.use("/products",auth,ProductRouter)
 
 
 app.get("/",auth,(req,res)=>{
