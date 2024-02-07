@@ -6,6 +6,6 @@ const auth = require("../middleware/auth.middleware");
 const orderRouter=express.Router();
 
 orderRouter.post("/placeOrder",auth,placeOrder)
-orderRouter.get("/history",orderHistory)
+orderRouter.get("/history",auth,orderHistory)
 
 module.exports=orderRouter;
