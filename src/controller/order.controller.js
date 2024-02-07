@@ -68,7 +68,7 @@ const placeOrder = async (req, res) => {
   res.status(201).send({msg:"order is placed successfully"})
 
   } catch (error) {
-    res
+    return res
       .status(401)
       .send({ msg: "placeOrder error", error: error.message });
   }
@@ -79,11 +79,11 @@ const orderHistory =async(req,res)=>{
   const user = req.me;
   try {
 
-    const data=await OrderModel.find({userId:new mongoose.Types.ObjectId(user.userId)})
+    const data=await OrderModel.find({userId: new mongoose.Types.ObjectId(user.userId)})
     res.status(200).send({msg:"history is now available",orderHistory:data})
     
   } catch (error) {
-    res.status(200).send({msg:"error in order history",error:error.message})
+    res.status(200).send({msg:"error in order history",error:error})
   }
 
 }

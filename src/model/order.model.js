@@ -5,7 +5,7 @@ const orderSchema = mongoose.Schema(
     userId: { type: mongoose.Types.ObjectId },
     productId: { type: mongoose.Types.ObjectId },
     productTitle: { type: String },
-    productPrice: { type: String },
+    productPrice: { type: Number },
     productCategory: { type: String },
     productDescription: { type: String },
     productImage: { type: String },
