@@ -39,7 +39,7 @@ const placeOrder = async (req, res) => {
     // orderDate:{type:Date ,default:Date.now()}
 
     if (cartdata.lenth == 0) {
-      res
+    return  res
         .status(400)
         .send({ msg: "your cart is empty , so add some products" });
     }
@@ -65,10 +65,10 @@ const placeOrder = async (req, res) => {
    
   const updateCartdetails=await CartModel.updateMany({userId: new mongoose.Types.ObjectId(user.userId),isRemove:false},{isRemove:true})
 
-   return res.status(201).send({msg:"order is placed successfully"})
+  res.status(201).send({msg:"order is placed successfully"})
 
   } catch (error) {
-    return res
+    res
       .status(401)
       .send({ msg: "placeOrder error", error: error.message });
   }
@@ -83,7 +83,7 @@ const orderHistory =async(req,res)=>{
     res.status(200).send({msg:"history is now available",orderHistory:data})
     
   } catch (error) {
-    res.status(200).send({msg:"error in order history",error:error})
+    res.status(200).send({msg:"error in order history",error:error.message})
   }
 
 }
