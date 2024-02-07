@@ -31,8 +31,7 @@ app.use(express.json());
 app.use("/user",userRouter)
 app.use("/cart",auth,cartRouter)
 app.use("/order",auth,orderRouter)
-app.use("/products",auth,ProductRouter)
-
+app.use("/products",ProductRouter)
 
 app.get("/",auth,(req,res)=>{
     res.send({msg:"welcome to nordStormRack....."})
