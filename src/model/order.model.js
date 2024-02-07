@@ -10,24 +10,15 @@ const orderSchema = mongoose.Schema(
     productDescription: { type: String },
     productImage: { type: String },
     productRating: { type: Number },
-    orderDate:{
-      type: Date,
-      default: Date.now,
-      get: (date) => {
-        // Format the date as dd/mm/yy hh:mm:ss
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0');
-        const year = date.getFullYear().toString().slice(-2);
-        const hours = date.getHours().toString().padStart(2, '0');
-        const minutes = date.getMinutes().toString().padStart(2, '0');
-        const seconds = date.getSeconds().toString().padStart(2, '0');
-
-        return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-      },
-    },
+    orderDate:{ type: Date, default: Date.now }
   },
   { versionKey: false }
 );
+
+
+orderSchema.virtual('formattedOrderDate').get(function () {
+  return moment(this.orderDate).format('DD/MM/YY');
+});
 
 const OrderModel = mongoose.model("order", orderSchema);
 
