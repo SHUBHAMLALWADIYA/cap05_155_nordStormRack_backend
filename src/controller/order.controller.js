@@ -75,4 +75,26 @@ const placeOrder = async (req, res) => {
 };
 
 
-module.exports=placeOrder
+const orderHistory =async(req,res)=>{
+  const user = req.me;
+  try {
+
+    const data=await OrderModel.find({userId: new mongoose.Types.ObjectId(user.userId)})
+    res.status(200).send({msg:"history is now available",orderHistory:data})
+    
+  } catch (error) {
+    res.status(200).send({msg:"error in order history",error:error})
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+module.exports={placeOrder,orderHistory}
