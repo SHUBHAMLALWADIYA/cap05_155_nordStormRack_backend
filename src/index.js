@@ -26,8 +26,6 @@ app.use(cors({
 ));
 app.use(express.json());
 
-
-
 //cap05155nordstormrackbackend-production.up.railway.app
 //routers
 app.use("/user",userRouter)
@@ -39,7 +37,6 @@ app.use("/products",auth,ProductRouter)
 app.get("/",auth,(req,res)=>{
     res.send({msg:"welcome to nordStormRack....."})
 })
-
 
 
 
