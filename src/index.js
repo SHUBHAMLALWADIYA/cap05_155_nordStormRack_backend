@@ -6,7 +6,7 @@ const connection = require("./db");
 const userRouter = require("./router/user.route");
 const cartRouter = require("./router/cart.route");
 const auth = require("./middleware/auth.middleware");
-const orderRouter = require("./router/order.rote");
+const orderRouter = require("./router/order.route");
 const ProductRouter = require("./router/products.route");
 
 const app=express();
