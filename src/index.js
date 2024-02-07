@@ -30,7 +30,7 @@ app.use(express.json());
 //routers
 app.use("/user",userRouter)
 app.use("/cart",auth,cartRouter)
-app.use("/order",auth,orderRouter)
+app.use("/order",orderRouter)
 app.use("/products",ProductRouter)
 
 app.get("/",auth,(req,res)=>{
