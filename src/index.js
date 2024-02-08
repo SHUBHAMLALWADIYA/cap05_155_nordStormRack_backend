@@ -19,7 +19,8 @@ app.use(cookieParser())
 app.use(cors({
     origin:[
         "https://cap05155nordstormrackbackend-production.up.railway.app",
-        "http://127.0.0.1:5173"
+        "http://127.0.0.1:5173",
+       "nordstormstackcap05155.netlify.app"
     ],
     credentials:true,
 }
